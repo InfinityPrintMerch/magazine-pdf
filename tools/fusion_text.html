@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Tools | Revista</title>
+    <link
+        href="https://fonts.googleapis.com/css2?
+family=Roboto&family=Open+Sans&family=Lato&family=Montserrat&family=Oswald&family=Raleway&family=Merriweather&family=Nunito&family=Ubuntu&family=PT+Sans&family=Source+Sans+Pro&family=Playfair+Display&family=Rubik&family=Work+Sans&family=Quicksand&family=Anton&family=Poppins&family=Fira+Sans&family=Roboto+Slab&family=Josefin+Sans&family=Comfortaa&family=Exo+2&family=Cairo&family=Karla&family=Mukta&family=Inconsolata&family=Zilla+Slab&family=Indie+Flower&family=Arvo&family=Pacifico&family=Dancing+Script&family=Catamaran&family=Varela+Round&family=Hind&family=Acme&family=Signika&family=Asap&family=Orbitron&family=Cabin&family=Manrope&family=Chivo&family=Archivo&family=Hind+Siliguri&family=Crete+Round&family=Concert+One&family=Heebo&family=Amatic+SC&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+
+
+    <script src="../js/fontmap.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <div id="nav-placeholder"></div>
+
+    <div class="page-container">
+
+        <section class="tools-header">
+            <h1>Fusión de Texto</h1>
+            <p class="subtitle">Genere automaticamente archivos pdf en base a una lista.</p>
+        </section>
+
+        <main>
+            <div id="uploadArea" class="drag-drop">
+                Arrastra tu archivo PDF aquí o haz clic para seleccionar
+                <input type="file" id="pdfInput" accept="application/pdf" hidden />
+            </div>
+
+            <div id="editorSection" style="display: none;">
+                <div class="editor-container">
+                    <div class="pdf-preview-wrapper">
+                        <canvas id="pdfCanvas"></canvas>
+                        <div id="textOverlay" contenteditable="true">Nombre Aquí</div>
+                    </div>
+
+                    <div class="editor-controls">
+                        <label>Lista de nombres:</label>
+                        <textarea id="nameList" placeholder="Un nombre por línea"></textarea>
+
+                        <label>Fuente:</label>
+                        <select id="fontSelect">
+                            <option class="font-BirthstoneRegular" value="Birthstone-Regular">Birthstone
+                            </option>
+                            <option class="font-CookieRegular" value="Cookie-Regular">Cookie Regular</option>
+                            <option class="font-DelaGothicOneRegular" value="DelaGothicOne-Regular">Dela Gothic One
+                            </option>
+                            <option class="font-ImperialScriptRegular" value="ImperialScript-Regular">Imperial Script
+                            </option>
+                            <option class="font-LilitaOneRegular" value="LilitaOne-Regular">Lilita One </option>
+                            <option class="font-LimelightRegular" value="Limelight-Regular">Limelight </option>
+                            <option class="font-LobsterRegular" value="Lobster-Regular">Lobster </option>
+                            <option class="font-MonotonRegular" value="Monoton-Regular">Monoton </option>
+                            <option class="font-MonsieurLaDoulaiseRegular" value="MonsieurLaDoulaise-Regular">Monsieur
+                                La Doulaise </option>
+                            <option class="font-NotableRegular" value="Notable-Regular">Notable </option>
+                            <option class="font-TheNautigalBold" value="TheNautigal-Bold">The Nautigal Bold</option>
+                            <option class="font-TheNautigalRegular" value="TheNautigal-Regular">The Nautigal
+                            </option>
+                            <option class="font-UnifrakturMaguntiaRegular" value="UnifrakturMaguntia-Regular">
+                                UnifrakturMaguntia </option>
+                            <option class="font-YesteryearRegular" value="Yesteryear-Regular">Yesteryear
+                            </option>
+
+                            <option class="font-LexendDecaBlack" value="LexendDeca-Black">Lexend Deca Black</option>
+                            <option class="font-LexendDecaBold" value="LexendDeca-Bold">Lexend Deca Bold</option>
+                            <option class="font-LexendDecaExtraBold" value="LexendDeca-ExtraBold">Lexend Deca ExtraBold
+                            </option>
+                            <option class="font-LexendDecaExtraLight" value="LexendDeca-ExtraLight">Lexend Deca
+                                ExtraLight</option>
+                            <option class="font-LexendDecaLight" value="LexendDeca-Light">Lexend Deca Light</option>
+                            <option class="font-LexendDecaMedium" value="LexendDeca-Medium">Lexend Deca Medium</option>
+                            <option class="font-LexendDecaRegular" value="LexendDeca-Regular">Lexend Deca
+                            </option>
+                            <option class="font-LexendDecaSemiBold" value="LexendDeca-SemiBold">Lexend Deca SemiBold
+                            </option>
+                            <option class="font-LexendDecaThin" value="LexendDeca-Thin">Lexend Deca Thin</option>
+
+                            <option class="font-RobotoBlack" value="Roboto-Black">Roboto Black</option>
+                            <option class="font-RobotoBlackItalic" value="Roboto-BlackItalic">Roboto Black Italic
+                            </option>
+                            <option class="font-RobotoBold" value="Roboto-Bold">Roboto Bold</option>
+                            <option class="font-RobotoBoldItalic" value="Roboto-BoldItalic">Roboto Bold Italic</option>
+                            <option class="font-RobotoExtraBold" value="Roboto-ExtraBold">Roboto ExtraBold</option>
+                            <option class="font-RobotoExtraBoldItalic" value="Roboto-ExtraBoldItalic">Roboto ExtraBold
+                                Italic</option>
+                            <option class="font-RobotoExtraLight" value="Roboto-ExtraLight">Roboto ExtraLight</option>
+                            <option class="font-RobotoExtraLightItalic" value="Roboto-ExtraLightItalic">Roboto
+                                ExtraLight Italic</option>
+                            <option class="font-RobotoItalic" value="Roboto-Italic">Roboto Italic</option>
+                            <option class="font-RobotoLight" value="Roboto-Light">Roboto Light</option>
+                            <option class="font-RobotoLightItalic" value="Roboto-LightItalic">Roboto Light Italic
+                            </option>
+                            <option class="font-RobotoMedium" value="Roboto-Medium">Roboto Medium</option>
+                            <option class="font-RobotoMediumItalic" value="Roboto-MediumItalic">Roboto Medium Italic
+                            </option>
+                            <option class="font-RobotoRegular" value="Roboto-Regular">Roboto </option>
+                            <option class="font-RobotoSemiBold" value="Roboto-SemiBold">Roboto SemiBold</option>
+                            <option class="font-RobotoSemiBoldItalic" value="Roboto-SemiBoldItalic">Roboto SemiBold
+                                Italic</option>
+                            <option class="font-RobotoThin" value="Roboto-Thin">Roboto Thin</option>
+                            <option class="font-RobotoThinItalic" value="Roboto-ThinItalic">Roboto Thin Italic</option>
+
+                            <option class="font-RubikBlack" value="Rubik-Black">Rubik Black</option>
+                            <option class="font-RubikBlackItalic" value="Rubik-BlackItalic">Rubik Black Italic</option>
+                            <option class="font-RubikBold" value="Rubik-Bold">Rubik Bold</option>
+                            <option class="font-RubikBoldItalic" value="Rubik-BoldItalic">Rubik Bold Italic</option>
+                            <option class="font-RubikExtraBold" value="Rubik-ExtraBold">Rubik ExtraBold</option>
+                            <option class="font-RubikExtraBoldItalic" value="Rubik-ExtraBoldItalic">Rubik ExtraBold
+                                Italic</option>
+                            <option class="font-RubikItalic" value="Rubik-Italic">Rubik Italic</option>
+                            <option class="font-RubikLight" value="Rubik-Light">Rubik Light</option>
+                            <option class="font-RubikLightItalic" value="Rubik-LightItalic">Rubik Light Italic</option>
+                            <option class="font-RubikMedium" value="Rubik-Medium">Rubik Medium</option>
+                            <option class="font-RubikMediumItalic" value="Rubik-MediumItalic">Rubik Medium Italic
+                            </option>
+                            <option class="font-RubikRegular" value="Rubik-Regular">Rubik Regular</option>
+                            <option class="font-RubikSemiBold" value="Rubik-SemiBold">Rubik SemiBold</option>
+                            <option class="font-RubikSemiBoldItalic" value="Rubik-SemiBoldItalic">Rubik SemiBold Italic
+                            </option>
+
+                            <option class="font-PermanentMarkerRegular" value="PermanentMarker-Regular">Permanent Marker
+                                Regular</option>
+
+                            <option class="font-TangerineBold" value="Tangerine-Bold">Tangerine Bold</option>
+                            <option class="font-TangerineRegular" value="Tangerine-Regular">Tangerine Regular</option>
+
+                            <option class="font-MontserratBlack" value="Montserrat-Black">Montserrat Black</option>
+                            <option class="font-MontserratBlackItalic" value="Montserrat-BlackItalic">Montserrat Black
+                                Italic</option>
+                            <option class="font-MontserratBold" value="Montserrat-Bold">Montserrat Bold</option>
+                            <option class="font-MontserratBoldItalic" value="Montserrat-BoldItalic">Montserrat Bold
+                                Italic</option>
+                            <option class="font-MontserratExtraBold" value="Montserrat-ExtraBold">Montserrat ExtraBold
+                            </option>
+                            <option class="font-MontserratExtraBoldItalic" value="Montserrat-ExtraBoldItalic">Montserrat
+                                ExtraBold Italic</option>
+                            <option class="font-MontserratExtraLight" value="Montserrat-ExtraLight">Montserrat
+                                ExtraLight</option>
+                            <option class="font-MontserratExtraLightItalic" value="Montserrat-ExtraLightItalic">
+                                Montserrat ExtraLight Italic</option>
+                            <option class="font-MontserratItalic" value="Montserrat-Italic">Montserrat Italic</option>
+                            <option class="font-MontserratLight" value="Montserrat-Light">Montserrat Light</option>
+                            <option class="font-MontserratLightItalic" value="Montserrat-LightItalic">Montserrat Light
+                                Italic</option>
+                            <option class="font-MontserratMedium" value="Montserrat-Medium">Montserrat Medium</option>
+                            <option class="font-MontserratMediumItalic" value="Montserrat-MediumItalic">Montserrat
+                                Medium Italic</option>
+                            <option class="font-MontserratRegular" value="Montserrat-Regular">Montserrat Regular
+                            </option>
+                            <option class="font-MontserratSemiBold" value="Montserrat-SemiBold">Montserrat SemiBold
+                            </option>
+                            <option class="font-MontserratSemiBoldItalic" value="Montserrat-SemiBoldItalic">Montserrat
+                                SemiBold Italic</option>
+                            <option class="font-MontserratThin" value="Montserrat-Thin">Montserrat Thin</option>
+                            <option class="font-MontserratThinItalic" value="Montserrat-ThinItalic">Montserrat Thin
+                                Italic</option>
+
+                            <option class="font-SansationBold" value="Sansation-Bold">Sansation Bold</option>
+                            <option class="font-SansationBoldItalic" value="Sansation-BoldItalic">Sansation Bold Italic
+                            </option>
+                            <option class="font-SansationItalic" value="Sansation-Italic">Sansation Italic</option>
+                            <option class="font-SansationLight" value="Sansation-Light">Sansation Light</option>
+                            <option class="font-SansationLightItalic" value="Sansation-LightItalic">Sansation Light
+                                Italic</option>
+                            <option class="font-SansationRegular" value="Sansation-Regular">Sansation Regular</option>
+
+                            <option class="font-NotoSansCondensedBlack" value="NotoSans_Condensed-Black">Noto Sans
+                                Condensed Black</option>
+                            <option class="font-NotoSansCondensedBlackItalic" value="NotoSans_Condensed-BlackItalic">
+                                Noto Sans Condensed Black Italic</option>
+                            <option class="font-NotoSansCondensedBold" value="NotoSans_Condensed-Bold">Noto Sans
+                                Condensed Bold</option>
+                            <option class="font-NotoSansCondensedBoldItalic" value="NotoSans_Condensed-BoldItalic">Noto
+                                Sans Condensed Bold Italic</option>
+                            <option class="font-NotoSansCondensedExtraBold" value="NotoSans_Condensed-ExtraBold">Noto
+                                Sans Condensed ExtraBold</option>
+                            <option class="font-NotoSansCondensedExtraBoldItalic"
+                                value="NotoSans_Condensed-ExtraBoldItalic">Noto Sans Condensed ExtraBold Italic</option>
+                            <option class="font-NotoSansCondensedExtraLight" value="NotoSans_Condensed-ExtraLight">Noto
+                                Sans Condensed ExtraLight</option>
+                            <option class="font-NotoSansCondensedExtraLightItalic"
+                                value="NotoSans_Condensed-ExtraLightItalic">Noto Sans Condensed ExtraLight Italic
+                            </option>
+                            <option class="font-NotoSansCondensedItalic" value="NotoSans_Condensed-Italic">Noto Sans
+                                Condensed Italic</option>
+                            <option class="font-NotoSansCondensedLight" value="NotoSans_Condensed-Light">Noto Sans
+                                Condensed Light</option>
+                            <option class="font-NotoSansCondensedLightItalic" value="NotoSans_Condensed-LightItalic">
+                                Noto Sans Condensed Light Italic</option>
+                            <option class="font-NotoSansCondensedMedium" value="NotoSans_Condensed-Medium">Noto Sans
+                                Condensed Medium</option>
+                            <option class="font-NotoSansCondensedMediumItalic" value="NotoSans_Condensed-MediumItalic">
+                                Noto Sans Condensed Medium Italic</option>
+                            <option class="font-NotoSansCondensedRegular" value="NotoSans_Condensed-Regular">Noto Sans
+                                Condensed Regular</option>
+                            <option class="font-NotoSansCondensedSemiBold" value="NotoSans_Condensed-SemiBold">Noto Sans
+                                Condensed SemiBold</option>
+                            <option class="font-NotoSansCondensedSemiBoldItalic"
+                                value="NotoSans_Condensed-SemiBoldItalic">Noto Sans Condensed SemiBold Italic</option>
+                            <option class="font-NotoSansCondensedThin" value="NotoSans_Condensed-Thin">Noto Sans
+                                Condensed Thin</option>
+                            <option class="font-NotoSansCondensedThinItalic" value="NotoSans_Condensed-ThinItalic">Noto
+                                Sans Condensed Thin Italic</option>
+
+                            <option class="font-NotoSansExtraCondensedBlack" value="NotoSans_ExtraCondensed-Black">Noto
+                                Sans ExtraCondensed Black</option>
+                            <option class="font-NotoSansExtraCondensedBlackItalic"
+                                value="NotoSans_ExtraCondensed-BlackItalic">Noto Sans ExtraCondensed Black Italic
+                            </option>
+                            <option class="font-NotoSansExtraCondensedBold" value="NotoSans_ExtraCondensed-Bold">Noto
+                                Sans ExtraCondensed Bold</option>
+                            <option class="font-NotoSansExtraCondensedBoldItalic"
+                                value="NotoSans_ExtraCondensed-BoldItalic">Noto Sans ExtraCondensed Bold Italic</option>
+                            <option class="font-NotoSansExtraCondensedExtraBold"
+                                value="NotoSans_ExtraCondensed-ExtraBold">Noto Sans ExtraCondensed ExtraBold</option>
+                            <option class="font-NotoSansExtraCondensedExtraBoldItalic"
+                                value="NotoSans_ExtraCondensed-ExtraBoldItalic">Noto Sans ExtraCondensed ExtraBold
+                                Italic</option>
+                            <option class="font-NotoSansExtraCondensedExtraLight"
+                                value="NotoSans_ExtraCondensed-ExtraLight">Noto Sans ExtraCondensed ExtraLight</option>
+                            <option class="font-NotoSansExtraCondensedExtraLightItalic"
+                                value="NotoSans_ExtraCondensed-ExtraLightItalic">Noto Sans ExtraCondensed ExtraLight
+                                Italic</option>
+                        </select>
+
+
+
+
+                        <label>Tamaño:</label>
+                        <input type="number" id="fontSize" min="8" value="24" />
+
+                        <label>Color:</label>
+                        <input type="color" id="fontColor" value="#000000" />
+
+                        <a id="generateBtn">
+                            <i class="fa-solid fa-hourglass-start"></i> Generar PDF
+                        </a>
+
+                        <a id="downloadLink" style="display:none" download="diplomas.pdf">
+                            <i class="fas fa-download"></i> Descargar PDF
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/partials.js"></script>
+
+
+</body>
+<script src="../js/fusion_text.js"></script>
+
+</html>

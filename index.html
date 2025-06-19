@@ -1,368 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 
+
 <head>
     <meta charset="UTF-8" />
-    <title>Acomodo Tabloide PDF - Moderno con Drag & Preview</title>
+    <title>Tools | Inicio</title>
     <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f7fa;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        header {
-            background: #4a90e2;
-            color: white;
-            width: 100%;
-            padding: 1rem 0;
-            text-align: center;
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
-        }
-
-        main {
-            max-width: 900px;
-            width: 100%;
-            margin: 1rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 6px 20px rgb(0 0 0 / 0.1);
-            padding: 1rem 2rem 2rem 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .drag-drop {
-            border: 2px dashed #4a90e2;
-            border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-            color: #4a90e2;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s, border-color 0.3s;
-            user-select: none;
-        }
-
-        .drag-drop.dragover {
-            background-color: #e6f0fe;
-            border-color: #1a62d8;
-            color: #1a62d8;
-        }
-
-        #inputPDF {
-            display: none;
-        }
-
-        button {
-            background-color: #4a90e2;
-            border: none;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            font-size: 1.1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            align-self: flex-start;
-            user-select: none;
-        }
-
-        button:disabled {
-            background-color: #a3bffa;
-            cursor: not-allowed;
-        }
-
-        button:hover:not(:disabled) {
-            background-color: #3578e5;
-        }
-
-        #descargar {
-            margin-top: 1rem;
-            font-weight: 600;
-            color: #1a62d8;
-            text-decoration: none;
-        }
-
-        #descargar:hover {
-            text-decoration: underline;
-        }
-
-        #previewContainer {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            max-height: 320px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            padding: 12px;
-            border-radius: 8px;
-            background: #fafafa;
-        }
-
-        canvas {
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-shadow: 1px 1px 5px rgb(0 0 0 / 0.1);
-            max-height: 150px;
-            cursor: default;
-            user-select: none;
-        }
-
-        .footer {
-            text-align: center;
-            margin: 2rem 0 1rem 0;
-            font-size: 0.85rem;
-            color: #888;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 
-    <header>Acomodo Tabloide PDF con Rotación, Drag & Preview</header>
+    <div id="nav-placeholder"></div>
 
-    <main>
-        <label for="inputPDF" class="drag-drop" id="dragDropArea">
-            Arrastra y suelta tu PDF aquí, o haz click para seleccionar archivo
-            <input type="file" id="inputPDF" accept="application/pdf" />
-        </label>
+    <div class="page-container">
 
-        <button id="procesarBtn" disabled>Procesar PDF</button>
-        <a id="descargar" style="display:none" download="">Descargar PDF con Acomodo y Rotación</a>
+        <section class="tools-header">
+            <h1>Herramientas Automatizadas Online</h1>
+            <p class="subtitle">Pensadas para facilitar el trabajo digital.</p>
+        </section>
 
-        <h3>Previsualización:</h3>
-        <div id="previewContainer" aria-live="polite" aria-label="Vista previa del PDF procesado">
-            <!-- Aquí van los canvas con miniaturas -->
+
+        <div class="button-grid">
+            <div class="icon-button">
+                <img src="https://i.ibb.co/0y1jZJg9/magazine.png" alt="Icono 1">
+                <div class="title">Revista</div>
+                <div class="description">Crea Formato Revista listo para imprimir.</div>
+            </div>
+            <div class="icon-button">
+                <img src="https://i.ibb.co/8tBFp1P/fusion-texto.png" alt="Icono 2">
+                <div class="title">Fusion Texto</div>
+                <div class="description">Crea texto dinamico por lotes.</div>
+            </div>
+            <div class="icon-button">
+                <img src="https://i.ibb.co/LD1kSGmL/fusion-numerica.png" alt="Icono 2">
+                <div class="title">Fusión Numerica</div>
+                <div class="description">Crea archivos para fusiones en CDR.</div>
+            </div>
+
         </div>
-    </main>
 
-    <div class="footer">
-        &copy; 2025 — Hecho con ❤️ por ChatGPT
+
     </div>
 
-    <script>
-        const { PDFDocument, degrees } = PDFLib;
+    <div id="footer-placeholder"></div>
 
-        // Generar pares según patrón pedido
-        function generarPares(totalPaginas) {
-            const pares = [];
-            let i = 1;
-            let j = totalPaginas;
-            let offset = 0;
+    <script src="../js/partials.js"></script>
 
-            while (i + offset <= j - offset) {
-                if (j - offset >= i + offset) {
-                    pares.push([j - offset, i + offset]);
-                }
-                if (i + offset + 1 <= j - offset - 1) {
-                    pares.push([i + offset + 1, j - offset - 1]);
-                }
-                offset += 2;
-            }
-            return pares;
-        }
-
-        const dragDropArea = document.getElementById('dragDropArea');
-        const inputPDF = document.getElementById('inputPDF');
-        const procesarBtn = document.getElementById('procesarBtn');
-        const descargarLink = document.getElementById('descargar');
-        const previewContainer = document.getElementById('previewContainer');
-
-        let pdfBytesProcesado = null;
-
-        // Manejo drag & drop
-        dragDropArea.addEventListener('dragover', e => {
-            e.preventDefault();
-            dragDropArea.classList.add('dragover');
-        });
-
-        dragDropArea.addEventListener('dragleave', e => {
-            e.preventDefault();
-            dragDropArea.classList.remove('dragover');
-        });
-
-        dragDropArea.addEventListener('drop', e => {
-            e.preventDefault();
-            dragDropArea.classList.remove('dragover');
-            if (e.dataTransfer.files.length) {
-                const file = e.dataTransfer.files[0];
-                if (file.type !== 'application/pdf') {
-                    alert('Por favor, selecciona un archivo PDF válido.');
-                    return;
-                }
-                cargarArchivo(file);
-            }
-        });
-
-        // Al seleccionar archivo con input
-        inputPDF.addEventListener('change', () => {
-            if (inputPDF.files.length) {
-                const file = inputPDF.files[0];
-                if (file.type !== 'application/pdf') {
-                    alert('Por favor, selecciona un archivo PDF válido.');
-                    return;
-                }
-                cargarArchivo(file);
-            }
-        });
-
-        function cargarArchivo(file) {
-            procesarBtn.disabled = false;
-            descargarLink.style.display = 'none';
-            previewContainer.innerHTML = '';
-            pdfBytesProcesado = null;
-            dragDropArea.textContent = `Archivo cargado: ${file.name}`;
-            dragDropArea.appendChild(inputPDF);
-            inputPDF.value = '';
-            archivoSeleccionado = file;
-        }
-
-        let archivoSeleccionado = null;
-
-        // Procesar PDF
-        procesarBtn.addEventListener('click', async () => {
-            if (!archivoSeleccionado) {
-                alert('Selecciona un archivo PDF primero.');
-                return;
-            }
-            procesarBtn.disabled = true;
-            procesarBtn.textContent = 'Procesando...';
-            descargarLink.style.display = 'none';
-            previewContainer.innerHTML = '';
-            try {
-                const arrayBuffer = await archivoSeleccionado.arrayBuffer();
-                pdfBytesProcesado = await procesarPDF(arrayBuffer);
-                await mostrarPrevisualizacion(pdfBytesProcesado);
-
-                // Crear enlace de descarga
-                const blob = new Blob([pdfBytesProcesado], { type: 'application/pdf' });
-                const url = URL.createObjectURL(blob);
-
-                descargarLink.href = url;
-                descargarLink.download = 'pdf_acomodo_tabloide_rotado.pdf';
-                descargarLink.style.display = 'inline-block';
-                descargarLink.textContent = 'Descargar PDF con Acomodo y Rotación';
-            } catch (e) {
-                alert('Error al procesar el PDF: ' + e.message);
-                console.error(e);
-            }
-            procesarBtn.disabled = false;
-            procesarBtn.textContent = 'Procesar PDF';
-        });
-
-        async function procesarPDF(buffer) {
-            const pdfOriginal = await PDFDocument.load(buffer);
-            const totalPaginas = pdfOriginal.getPageCount();
-
-            const pdfNuevo = await PDFDocument.create();
-
-            const pares = generarPares(totalPaginas);
-
-            const anchoTabloide = 1224; // 17 * 72
-            const altoTabloide = 792; // 11 * 72
-
-            const anchoPagina = anchoTabloide / 2;
-            const altoPagina = altoTabloide;
-
-            for (const [pagIzq, pagDer] of pares) {
-                const paginaNueva = pdfNuevo.addPage([anchoTabloide, altoTabloide]);
-
-                const paginaIzquierdaIdx = pagIzq - 1;
-                const paginaDerechaIdx = pagDer - 1;
-
-                if (paginaIzquierdaIdx >= 0 && paginaIzquierdaIdx < totalPaginas) {
-                    const [paginaIzqEmbed] = await pdfNuevo.embedPages([pdfOriginal.getPage(paginaIzquierdaIdx)]);
-                    const { width: originalWidth, height: originalHeight } = paginaIzqEmbed.scale(1);
-                    const scaleIzq = Math.min(anchoPagina / originalWidth, altoPagina / originalHeight);
-
-
-                    paginaNueva.drawPage(paginaIzqEmbed, {
-                        x: 0,
-                        y: 0,
-                        scale: scaleIzq
-                    });
-
-
-                }
-                if (paginaDerechaIdx >= 0 && paginaDerechaIdx < totalPaginas && paginaDerechaIdx !== paginaIzquierdaIdx) {
-                    const [paginaDerEmbed] = await pdfNuevo.embedPages([pdfOriginal.getPage(paginaDerechaIdx)]);
-                    const { width: originalWidthDer, height: originalHeightDer } = paginaDerEmbed.scale(1);
-                    const scaleDer = Math.min(anchoPagina / originalWidthDer, altoPagina / originalHeightDer);
-
-                    paginaNueva.drawPage(paginaDerEmbed, {
-                        x: anchoPagina,
-                        y: 0,
-                        scale: scaleDer
-                    });
-
-
-                }
-            }
-
-            // Rotar páginas según impar/par
-            const paginas = pdfNuevo.getPages();
-            for (let idx = 0; idx < paginas.length; idx++) {
-                const pagina = paginas[idx];
-                if ((idx + 1) % 2 === 1) {
-                    pagina.setRotation(degrees(270));
-                } else {
-                    pagina.setRotation(degrees(90));
-                }
-            }
-
-            const pdfBytes = await pdfNuevo.save();
-            return pdfBytes;
-        }
-
-        // Función para mostrar previsualización en canvas usando pdf-lib + canvas
-        async function mostrarPrevisualizacion(pdfBytes) {
-            previewContainer.innerHTML = '';
-            const pdfDoc = await PDFDocument.load(pdfBytes);
-            const paginas = pdfDoc.getPages();
-
-            for (let i = 0; i < paginas.length; i++) {
-                // Para previsualizar vamos a usar un pequeño canvas
-                // pdf-lib no renderiza, así que usaremos pdf.js para renderizar
-                // Pero para mantenerlo simple sin librerías externas, 
-                // haremos algo sencillo: mostrar miniatura de la página (thumbnail)
-                // con la ayuda de un iframe embebido con src en blob URL.
-                // Pero iframe es pesado, así que mejor usaremos pdf.js (CDN) para render en canvas
-
-                // Para evitar usar pdf.js que es pesado, aquí hacemos una técnica sencilla:
-                // creamos un <embed> PDF con solo una página. Pero embed no permite páginas específicas.
-                // Mejor mostrar texto simple con número de página.
-
-                // Por simplicidad, mostraremos solo un canvas con texto indicando página.
-                // Si quieres render real con pdf.js dime y lo integro.
-
-                const canvas = document.createElement('canvas');
-                canvas.width = 150;
-                canvas.height = 200;
-                const ctx = canvas.getContext('2d');
-                ctx.fillStyle = '#eee';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = '#333';
-                ctx.font = 'bold 20px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText(`Página ${i + 1}`, canvas.width / 2, canvas.height / 2);
-                ctx.font = '14px Arial';
-                ctx.fillText(`(Vista previa simple)`, canvas.width / 2, canvas.height / 2 + 30);
-
-                previewContainer.appendChild(canvas);
-            }
-        }
-    </script>
 
 </body>
 

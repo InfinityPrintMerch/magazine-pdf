@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Tools | Revista</title>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <div id="nav-placeholder"></div>
+
+    <div class="page-container">
+
+        <section class="tools-header">
+            <h1>Revista Automatica</h1>
+            <p class="subtitle">Genera un Archivo PDF listo para imprimir y realizar una Revista</p>
+        </section>
+
+        <main>
+            <label for="inputPDF" class="drag-drop" id="dragDropArea">
+                Arrastra y suelta tu PDF aquí, o haz click para seleccionar archivo
+                <input type="file" id="inputPDF" accept="application/pdf" />
+            </label>
+
+            <button id="procesarBtn" disabled>Procesar PDF</button>
+            <a id="descargar" style="display:none" download="">Descargar PDF con Acomodo y Rotación</a>
+
+            <h3>Previsualización:</h3>
+            <div id="previewContainer" aria-live="polite" aria-label="Vista previa del PDF procesado">
+                <!-- Aquí van los canvas con miniaturas -->
+            </div>
+        </main>
+
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/partials.js"></script>
+
+
+</body>
+<script src="../js/magazine.js"></script>
+
+</html>
