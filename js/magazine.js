@@ -64,15 +64,18 @@ inputPDF.addEventListener('change', () => {
 });
 
 function cargarArchivo(file) {
+    procesarBtn.style.display = 'inline-block'; // ← muestra el botón
     procesarBtn.disabled = false;
     descargarLink.style.display = 'none';
     previewContainer.innerHTML = '';
     pdfBytesProcesado = null;
-    dragDropArea.textContent = `Archivo cargado: ${file.name}`;
-    dragDropArea.appendChild(inputPDF);
-    inputPDF.value = '';
     archivoSeleccionado = file;
+
+    // Ocultar drag & drop
+    dragDropArea.style.display = 'none';
 }
+
+
 
 let archivoSeleccionado = null;
 
@@ -96,15 +99,21 @@ procesarBtn.addEventListener('click', async () => {
         const url = URL.createObjectURL(blob);
 
         descargarLink.href = url;
-        descargarLink.download = 'pdf_acomodo_tabloide_rotado.pdf';
+        descargarLink.download = 'revista_procesada.pdf';
         descargarLink.style.display = 'inline-block';
-        descargarLink.textContent = 'Descargar PDF con Acomodo y Rotación';
+        descargarLink.textContent = 'Descargar PDF';
+
+        document.getElementById('previewSection').style.display = 'block';
+
+        procesarBtn.style.display = 'none';
+
     } catch (e) {
         alert('Error al procesar el PDF: ' + e.message);
         console.error(e);
     }
     procesarBtn.disabled = false;
     procesarBtn.textContent = 'Procesar PDF';
+
 });
 
 async function procesarPDF(buffer) {
@@ -165,37 +174,27 @@ async function procesarPDF(buffer) {
 // Función para mostrar previsualización en canvas usando pdf-lib + canvas
 async function mostrarPrevisualizacion(pdfBytes) {
     previewContainer.innerHTML = '';
-    const pdfDoc = await PDFDocument.load(pdfBytes);
-    const paginas = pdfDoc.getPages();
 
-    for (let i = 0; i < paginas.length; i++) {
-        // Para previsualizar vamos a usar un pequeño canvas
-        // pdf-lib no renderiza, así que usaremos pdf.js para renderizar
-        // Pero para mantenerlo simple sin librerías externas, 
-        // haremos algo sencillo: mostrar miniatura de la página (thumbnail)
-        // con la ayuda de un iframe embebido con src en blob URL.
-        // Pero iframe es pesado, así que mejor usaremos pdf.js (CDN) para render en canvas
+    const loadingTask = pdfjsLib.getDocument({ data: pdfBytes });
+    const pdf = await loadingTask.promise;
 
-        // Para evitar usar pdf.js que es pesado, aquí hacemos una técnica sencilla:
-        // creamos un <embed> PDF con solo una página. Pero embed no permite páginas específicas.
-        // Mejor mostrar texto simple con número de página.
-
-        // Por simplicidad, mostraremos solo un canvas con texto indicando página.
-        // Si quieres render real con pdf.js dime y lo integro.
+    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        const page = await pdf.getPage(pageNum);
+        const viewport = page.getViewport({ scale: 0.2 }); // Ajusta el tamaño a gusto
 
         const canvas = document.createElement('canvas');
-        canvas.width = 150;
-        canvas.height = 200;
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#eee';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#333';
-        ctx.font = 'bold 20px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText(`Página ${i + 1}`, canvas.width / 2, canvas.height / 2);
-        ctx.font = '14px Arial';
-        ctx.fillText(`(Vista previa simple)`, canvas.width / 2, canvas.height / 2 + 30);
+        const context = canvas.getContext('2d');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        await page.render({
+            canvasContext: context,
+            viewport: viewport
+        }).promise;
 
         previewContainer.appendChild(canvas);
     }
 }
+
+
+

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Tools | PDF A JPG</title>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js';
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+    <div id="nav-placeholder"></div>
+
+    <div class="page-container">
+
+        <section class="tools-header">
+            <h1>PDF a JPG</h1>
+            <p class="subtitle">Conveirte archivos PDF a JPG con alta Resolución</p>
+        </section>
+
+        <main>
+
+            <div id="loadingProgressContainer" class="progress-container" style="display: none;">
+                <div id="loadingProgressBar" class="progress-bar"></div>
+            </div>
+
+            <div id="loadingProgressText" class="progress-text" style="display: none;">Cargando PDF...</div>
+
+
+            <div id="progressText" class="progress-text" style="display: none;">Cargando páginas...</div>
+            <div class="progress-container" id="progressContainer" style="display: none;">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+
+            <!-- Drag & Drop -->
+            <label for="inputPDF" class="drag-drop" id="dragDropArea">
+                Arrastra y suelta tu PDF aquí, o haz click para seleccionar archivo
+                <input type="file" id="inputPDF" accept="application/pdf" />
+            </label>
+
+            <div class="pdf2jpg-container">
+                <div class="pdf2jpg-preview">
+                    <div id="pdfPreviewPages"></div>
+                </div>
+
+
+                <div class="pdf2jpg-controls">
+                    <label for="scaleInput">Resolución:</label>
+                    <select id="scaleInput">
+                        <option value="150">150 dpi</option>
+                        <option value="300">300 dpi</option>
+                        <option value="600">600 dpi</option>
+                        <option value="1200" selected>1200 dpi</option>
+                    </select>
+
+                    <label for="formatSelect">Formato:</label>
+                    <select id="formatSelect">
+                        <option value="jpeg">JPG</option>
+                        <option value="png">PNG</option>
+                    </select>
+
+
+
+                    <button id="convertBtn" class="pdf2jpg-btn">Convertir</button>
+                    <a id="downloadBtn" class="pdf2jpg-btn" style="display: none;" download>Descargar</a>
+
+                    <div id="status" class="pdf2jpg-status"></div>
+                </div>
+            </div>
+
+
+
+
+        </main>
+
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/partials.js"></script>
+
+
+</body>
+<script src="../js/pdf_converter.js"></script>
+
+</html>

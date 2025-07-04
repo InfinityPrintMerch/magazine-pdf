@@ -1,4 +1,5 @@
 const fontMap = {
+    "Arial-Regular": "../fonts/Arial-Regular.ttf",
     "Birthstone-Regular": "../fonts/Birthstone-Regular.ttf",
     "Cookie-Regular": "../fonts/Cookie-Regular.ttf",
     "DelaGothicOne-Regular": "../fonts/DelaGothicOne-Regular.ttf",

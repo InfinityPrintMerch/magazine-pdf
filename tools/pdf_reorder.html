@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Tools | Reordenar PDF</title>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js';
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Añadido solo para el botón eliminar sobre las miniaturas */
+        .page-thumb {
+            position: relative;
+            display: inline-block;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .page-thumb .delete-btn {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: #fad400;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            color: #303030;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 22px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgb(0 0 0 / 0.3);
+            user-select: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .page-thumb .delete-btn:hover {
+            background: #ff0000;
+            color: #fff;
+        }
+
+        /* Ajustar tamaño miniaturas para mejor vista */
+        #previewContainer canvas {
+            width: 150px !important;
+            height: auto !important;
+            border: 1px solid #fad400;
+            border-radius: 6px;
+        }
+
+        /* Para la página que se está arrastrando */
+        .sortable-chosen {
+            cursor: grabbing !important;
+            box-shadow: 0 10px 20px rgba(250, 212, 0, 0.7);
+            transform: scale(1.05);
+            z-index: 1000;
+        }
+
+        /* El placeholder donde se va a insertar la página */
+        .sortable-ghost {
+            opacity: 0.4;
+            border: 2px dashed #fad400;
+            background: #303030;
+            border-radius: 8px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div id="nav-placeholder"></div>
+
+    <div class="page-container">
+
+        <section class="tools-header">
+            <h1>Reordenar PDF</h1>
+            <p class="subtitle">Acomoda, Eliminar paginas de PDF.</p>
+        </section>
+
+        <main>
+
+            <label class="drag-drop" for="inputPDF" id="dragDropArea">
+                Arrastra o haz clic aquí para seleccionar un archivo PDF
+                <input type="file" id="inputPDF" accept="application/pdf" />
+            </label>
+
+            <div id="previewContainer"></div>
+
+            <button id="downloadBtn" disabled>Descargar PDF Reordenado</button>
+            <p class="progress-text" id="progressText" style="margin-top: 1rem;"></p>
+
+        </main>
+
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/partials.js"></script>
+
+
+</body>
+<script src="../js/pdf_reorder.js"></script>
+
+</html>

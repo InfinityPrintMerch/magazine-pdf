@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Tools | Revista</title>
+    <link
+        href="https://fonts.googleapis.com/css2?
+family=Roboto&family=Open+Sans&family=Lato&family=Montserrat&family=Oswald&family=Raleway&family=Merriweather&family=Nunito&family=Ubuntu&family=PT+Sans&family=Source+Sans+Pro&family=Playfair+Display&family=Rubik&family=Work+Sans&family=Quicksand&family=Anton&family=Poppins&family=Fira+Sans&family=Roboto+Slab&family=Josefin+Sans&family=Comfortaa&family=Exo+2&family=Cairo&family=Karla&family=Mukta&family=Inconsolata&family=Zilla+Slab&family=Indie+Flower&family=Arvo&family=Pacifico&family=Dancing+Script&family=Catamaran&family=Varela+Round&family=Hind&family=Acme&family=Signika&family=Asap&family=Orbitron&family=Cabin&family=Manrope&family=Chivo&family=Archivo&family=Hind+Siliguri&family=Crete+Round&family=Concert+One&family=Heebo&family=Amatic+SC&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+
+
+    <script src="../js/fontmap.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <div id="nav-placeholder"></div>
+
+    <div class="page-container">
+
+        <section class="tools-header">
+            <h1>Fusión de Texto</h1>
+            <p class="subtitle">Genere automaticamente archivos pdf en base a una lista.</p>
+        </section>
+
+        <main>
+
+            <!-- 1. Selección de PDF -->
+            <div id="dragDropLabel" class="drag-drop">
+                Arrastra y suelta tu PDF aquí o haz clic para seleccionar
+                <input type="file" id="pdfFile" accept="application/pdf" hidden />
+            </div>
+
+            <div id="contenidoPDF" style="display: none;">
+                <!-- 2. Configuración -->
+                <section class="editor-controls">
+                    <label for="pageSize">Tamaño de hoja de salida:</label>
+                    <select id="pageSize" class="input-select">
+                        <option value="LETTER">Carta (8.5 x 11 pulgadas)</option>
+                        <option value="TABLOID">Tabloide (11 x 17 pulgadas)</option>
+                        <option value="EXTRATABLOID">ExtraTabloide (13 x 19 pulgadas)</option>
+                    </select>
+
+                    <label for="orientation">Orientación de la hoja:</label>
+                    <select id="orientation" class="input-select">
+                        <option value="portrait">Vertical (Portrait)</option>
+                        <option value="landscape">Horizontal (Landscape)</option>
+                    </select>
+
+                    <label for="pdfRotation">Rotación del PDF base:</label>
+                    <select id="pdfRotation" class="input-select">
+                        <option value="0">0°</option>
+                        <option value="90">90°</option>
+                        <option value="180">180°</option>
+                        <option value="270">270°</option>
+                    </select>
+
+                    <label for="copiesPerPage">Copias por página:</label>
+                    <input id="copiesPerPage" type="number" min="1" value="4" class="input-number" />
+
+                    <label for="copyMargin">Margen entre copias (puntos):</label>
+                    <input id="copyMargin" type="number" min="0" value="10" class="input-number" />
+
+                    <label for="startNumber">Número inicio:</label>
+                    <input id="startNumber" type="number" placeholder="Ej. 1" class="input-number" />
+
+                    <label for="endNumber">Número fin:</label>
+                    <input id="endNumber" type="number" placeholder="Ej. 100" class="input-number" />
+
+                    <button id="togglePreviewBtn">Mostrar acomodo</button>
+
+                    <button id="generateBtn">Generar PDF</button>
+                </section>
+
+                <!-- 3. Previsualización PDF original -->
+                <section id="originalPreviewContainer" class="pdf-preview-wrapper">
+                    <canvas id="originalCanvas"></canvas>
+                </section>
+
+                <!-- 4. Previsualización acomodo -->
+                <section id="layoutPreviewContainer" class="pdf-preview-wrapper" style="display: none;">
+                    <canvas id="layoutCanvas" width="auto" height="600"></canvas>
+                    <div id="draggable-number">0001</div>
+                </section>
+
+                <p id="status"></p>
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/partials.js"></script>
+
+
+</body>
+<script src="../js/fusion_numeric.js"></script>
+
+</html>

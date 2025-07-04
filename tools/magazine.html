@@ -6,7 +6,14 @@
     <meta charset="UTF-8" />
     <title>Tools | Revista</title>
     <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js';
+    </script>
+
     <link rel="stylesheet" href="../css/style.css">
+
 </head>
 
 <body>
@@ -26,13 +33,16 @@
                 <input type="file" id="inputPDF" accept="application/pdf" />
             </label>
 
-            <button id="procesarBtn" disabled>Procesar PDF</button>
-            <a id="descargar" style="display:none" download="">Descargar PDF con Acomodo y Rotación</a>
+            <a id="procesarBtn" style="display:none"><i class="fa-solid fa-hourglass-start"></i> Procesar PDF</a>
+            <a id="descargar" style="display:none" download=""><i class="fas fa-download"></i> Descargar PDF</a>
+            <a id="cargarOtroBtn" style="display:none"><i class="fas fa-file-upload"></i> Cargar otro PDF</a>
 
-            <h3>Previsualización:</h3>
-            <div id="previewContainer" aria-live="polite" aria-label="Vista previa del PDF procesado">
-                <!-- Aquí van los canvas con miniaturas -->
+
+            <div id="previewSection" style="display: none;">
+                <h3>Previsualización:</h3>
+                <div id="previewContainer" aria-live="polite" aria-label="Vista previa del PDF procesado"></div>
             </div>
+
         </main>
 
     </div>
